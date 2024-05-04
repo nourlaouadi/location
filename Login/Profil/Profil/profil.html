@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>home location</title>
+        <link rel="stylesheet"  href="profil.css">
+       
+        <!-- boxicons link -->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    </head>
+    
+    <body>
+        
+            <!-- <div class="logo">
+                <a href="#"><span>home</span> location</a>
+    
+            </div> -->
+            <div class="profil">
+                <ul class="profil-bar">
+                  <li>
+                    <a href="#" class="btn">
+                        <i class='bx bx-home' ></i>
+                        <!-- <span class="links-profile"></span> -->
+                    </a>
+                  </li> 
+                  
+                    <li>
+                        <a href="../login.html" class="btn">
+                        <i class='bx bx-plus-circle' ></i>
+                        <!-- <span class="links-profile"></span> -->
+                         </a>
+
+                    </li>
+                    <li>
+                       <a href="#" class="btn">
+                        <i class='bx bx-user' ></i>
+                        <!-- <span class="links-profile"></span> -->
+                    </a> 
+                    </li>
+                     
+                </ul>
+            </div>
+            <!-- <ul class="menu">
+                <li><a href="../login.html">Acceuil</a></li>
+                <li><a href="#dis">A propos</a></li>
+                <li><a href="#contact">contact</a></li>
+            </ul> -->
+            
+           
+        
+
+        <!-- sidebar -->
+
+        <div class="sidebar">
+            <div class="logo-content">
+                <div class="logo">
+                    <div class="logo-name"></div>
+                </div>
+                <i class='bx bx-menu' id="btn"></i>
+            </div>
+            <ul class="nav-list">
+                <li>
+                        <i class='bx bx-search' ></i>
+                        <input type="text" placeholder="Recherche..."/>
+                        <span class="tooltip">Recherche</span>
+               </li>
+               <h4>compte</h4>
+               <li>
+                    <a href="#">
+                        <i class='bx bxs-dashboard' ></i>
+                        <span class="links-name">Tableau de bord</span>
+                    </a>
+                    <span class="tooltip">Dashboard</span>
+               </li>
+               <li>
+                    <a href="#">
+                        <i class='bx bx-user' ></i>
+                        <span class="links-name">Mon profile</span>
+                    </a>
+                    <span class="tooltip">Profile</span>
+                </li>
+               <li>
+                    <a href="#">
+                        <i class='bx bx-log-in' ></i>
+                        <span class="links-name">Se deconnecter</span>
+                    </a>
+                    <span class="tooltip">deconnecter</span>
+                </li>
+               <li>
+                    <a href="#">
+                        <i class='bx bx-cog' ></i>
+                        <span class="links-name">parametres</span>
+                    </a>
+                    <span class="tooltip">parametres</span>
+               </li>
+               <h4>Annonces</h4>
+               <li>
+                    <a href="../Annonce/Annonce.html">
+                        <i class='bx bx-plus-circle' ></i>
+                        <span class="links-name">Ajouter Annonce</span>
+                    </a>
+                    <span class="tooltip">Ajouter </span>
+               </li>
+               <li>
+                    <a href="../Annonce/Annonce.html">
+                        <i class='bx bx-cart-alt' ></i>
+                        <span class="links-name">Mes Annonces</span>
+                    </a>
+                    <span class="tooltip">Mes Annonces</span>
+               </li>
+               
+              
+              
+                       
+            </div>
+        </ul>
+        <!-- <div class="home-content">
+             <div class="text">Home location</div>
+        </div> -->
+
+         <!-- Script -->
+        <script>
+            let btn = document.querySelector("#btn");
+            let sidebar = document.querySelector(".sidebar");
+            let searchBtn = document.querySelector(".bx-search");
+            // let dashboard = document.querySelector(".bxs-dashboard");
+
+            btn.onclick = function() {
+                sidebar.classList.toggle("active");
+            }
+            searchBtn.onclick = function() {
+                sidebar.classList.toggle("active");
+            }
+            // dashboard.onclick = function() {
+            //     sidebar.classList.toggle("active");
+            // }
+        </script>
+     </body>
+</html>
+

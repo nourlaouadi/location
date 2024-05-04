@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home location</title>
+    <link rel="stylesheet"  href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    
+    <!-- jquery link -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="index.html"><span>home</span> location</a>
+
+        </div>
+        <ul class="menu">
+            <li><a href="#">Acceuil</a></li>
+            <li><a href="#dis">A propos</a></li>
+            <li><a href="../Profil/profil.html">Les annonces</a></li>
+        </ul>
+             <a href="../Login/login.html" class="btn-login">login</a>
+
+    </header>
+
+    <!-- Acceuil section -->
+    <section id="home">
+        <h2>Nous suivre</h2>
+        <h4>votre location</h4>
+        <!-- <p>credibilite et securite,le secret de notre reussite</p>
+        <p>le confort du client est notre priorite</p>
+        <a href="../Login/login.html" class="btn-login home-btn">login</a>
+         -->
+        <div class="find-trip">
+            <form id="cityForm" action="your_php_file.php" method="post">
+
+                <!-- Sélection dynamique de la wilaya -->
+                <div class="input-field">
+                    <!-- <label>Wilaya </label> -->
+                    <select id="wilaya" name="wilaya" onchange="getCommunes()" required>
+                        <option value="">wilaya</option>
+                    </select>
+                </div>
+
+                <div class="input-field">
+                    <!-- Sélection dynamique de la commune -->
+                    <!-- <label>Commune </label> -->
+                    <select id="commune" name="commune" required>
+                        <option value="">Commune</option>
+                    </select>
+                </div>
+                <input type="submit" value="voir">
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- A propos -->
+    <section id="dis">
+        <h1 class="title"> A propos</h1>
+        <div class="content">
+            <!-- Box -->
+            <div class="box">
+                <img src="images/algeria-grand-mosque-algiers-600nw-2305702069.webp">
+                <div class="content">
+                    <div>
+                        <h4>Alger</h4>
+                        <p>entree pour decouvrire </p>
+                        <a href="#">Lire plus</a>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Box -->
+            <!-- Box -->
+            <div class="box">
+                <img src="images/kasantina.jpg">
+                <div class="content">
+                    <div>
+                        <h4>Constantin</h4>
+                        <p>entree pour dcouvrire </p>
+                        <a href="#">Lire plus</a>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Box -->
+            <!-- Box -->
+            <div class="box">
+                <img src="images/blida.jpg">
+                <div class="content">
+                    <div>
+                        <h4>Blida</h4>
+                        <p>entree pour dcouvrire </p>
+                        <a href="#">Lire plus</a>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Box -->
+            <!-- Box -->
+            <div class="box">
+                <img src="images/anaba.jpg">
+                <div class="content">
+                    <div>
+                        <h4>Anaba</h4>
+                        <p>entree pour dcouvrire </p>
+                        <a href="#">Lire plus</a>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Box -->
+            <!-- Box -->
+            <div class="box">
+                <img src="images/tamanrest2.jpg">
+                <div class="content">
+                    <div>
+                        <h4>Tamanrasset</h4>
+                        <p>entree pour dcouvrire </p>
+                        <a href="#">Lire plus</a>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Box -->
+            <!-- Box -->
+            <div class="box">
+                <img src="images/Oran.jpg">
+                <div class="content">
+                    <div>
+                        <h4>Oran</h4>
+                        <p>entree pour dcouvrire </p>
+                        <a href="#">Lire plus</a>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Box -->
+        </div>
+    </section>
+     <!-- scriptt -->
+     <script>
+     // js code de wilya et la commune
+        $(document).ready(function(){
+            console.log('ready');
+            function loadStates() {
+                $.ajax({
+                    url: 'https://countriesnow.space/api/v0.1/countries/states',
+                    type: 'POST',
+                    data: {country: 'Algeria'},
+                    dataType: 'json',
+                    success: function(data) {
+                        $('#wilaya').empty();
+                        $('#wilaya').append($('<option>').text('Choisir une wilaya'));
+                        $.each(data.data.states, function(index, state) {
+                            $('#wilaya').append($('<option>').text(state.name.replace(" Province", "")).attr('value', state.name.replace(" Province", "")));
+                        });
+                    }
+                });
+            }
+    
+            function loadCities(state) {
+                $.ajax({
+                    url: 'https://countriesnow.space/api/v0.1/countries/state/cities',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {country: "Algeria", state: state + " Province"},
+                    success: function(data) {
+                        $('#commune').empty();
+                        $('#commune').append($('<option>').text('Choisir une commune'));
+                        $.each(data.data, function(index, city) {
+                            $('#commune').append($('<option>').text(city).attr('value', city));
+                        });
+                    }
+                });
+            }
+    
+            loadStates();
+    
+            $('#wilaya').change(function(){
+                var state = $(this).val();
+                if (state === '' || state === 'Choisissez d\'abord une wilaya' || state === 'Choisir une commune') {
+                    return;
+                }
+                loadCities(state);
+            });
+        });
+    </script>
+    
+
+
+</body>
+
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home location</title>
+    <link rel="stylesheet" href="AjouAnnonce.css">
+
+    <!-- boxicons link -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- jquery link -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+</head>
+
+<body>
+
+    <!-- profil -->
+    <div class="profil">
+        <ul class="profil-bar">
+          <li>
+            <a href="#" class="btn">
+                <i class='bx bx-home' ></i>
+            </a>
+          </li>  
+          
+          <li>
+             <a href="#" class="btn">
+                <i class='bx bx-user' ></i>
+            </a> 
+         </li>
+    
+        </ul>
+    </div>
+
+    <!-- container -->
+    <div class="container">
+        <header>Creer une annonce</header>
+
+        <form id="cityForm" action="your_php_file.php" method="post">
+            <div class="form first">
+                <div class="details personal">
+                    <span class="title">Caracteristique de l'annonce</span>
+
+                    <div class="fields">
+
+                        <div class="input-field">
+                            <label>Email</label>
+                            <input type="text" placeholder="Votre email" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Telephone</label>
+                            <input type="number" placeholder="Votre Telephone " required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Transaction</label>
+                            <select id="id" required>
+                                <option>paiement par</option>
+                                <option value="semaine">semaine</option>
+                                <option value="1 mois">1 mois</option>
+                                <option value="3 mois">3 mois</option>
+                                <option value="6 mois">6 mois</option>
+                                <option value="12 mois">12 mois</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Desription du bien</label>
+                            <input type="number" placeholder="Superfice" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Desription du bien</label>
+                            <input type="text" placeholder="Etage" required>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Desription du bien</label>
+                            <input type="number" placeholder="pieces" required>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- 2eme partie -->
+                <div class="details ID">
+                    <span class="title">Adresse du bien *(obligatoire)</span>
+
+                    <div class="fields">
+                        <!-- Sélection dynamique de la wilaya -->
+                                <div class="input-field">
+                                    <label>Wilaya </label>
+                                    <select id="wilaya" name="wilaya" onchange="getCommunes()" required>
+                                        <option value="">wilaya</option>
+                                    </select>
+                                </div>
+
+                                <div class="input-field">
+                                    <!-- Sélection dynamique de la commune -->
+                                    <label>Commune </label>
+                                    <select id="commune" name="commune" required>
+                                        <option value="">Commune</option>
+                                    </select>
+                                </div>
+
+                        <div class="input-field">
+                            <label>Description </label>
+                            <textarea id="description" name="description" required></textarea>
+
+                        </div>
+
+                    </div>
+
+                    <!-- BTN NEXT -->
+                    <button class="nextBtn">
+                        <span class="btnText">CONTINUER</span>
+                        <i class='bx bxs-right-arrow-alt'></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- next page -->
+
+            <div class="form second">
+                <div class="details address">
+
+                    <span class="title">Prix</span>
+
+                    <div class="fields">
+
+                        <div class="input-field">
+                            <label>Prix </label>
+                            <input type="number"  placeholder=" Le prix " required>
+                        </div>
+
+                    <!-- Unité de prix -->
+                        <div class="input-field">
+                            <label>Unité de prix </label>
+                            <select id="unite_prix" name="unite_prix" required>
+                                <option value="DA">DA</option>
+                                <option value="millions">millions</option>
+                                <option value="milliards">milliards</option>
+                                <option value="millions/m²">millions/m²</option>
+                                <option value="DA/m²">DA/m²</option>
+                            </select>
+                        </div>
+
+                        <div class="input-field">
+                            <label>Type d'offre </label>
+                            <select id="unite" name="unite" required>
+                                <option value="Type d'offre">Type d'offre</option>
+                                <option value="Fixe">Fixe</option>
+                                <option value="Negociable">Negociable</option>
+                                <option value="Offert">Offert</option>
+                               
+                            </select>
+                        </div>
+                    </div>             
+                </div>
+
+                <!-- 2eme partie -->
+                <div class="details ID">
+                    <span class="title">Photos</span>
+
+                    <div class="input-field">
+
+                          <!-- Champ pour les photos -->
+                          <div class="input-field">
+                                <label for="photos">Photos </label>
+                                <input type="file" id="photos" name="photos[]" multiple accept="image/*">
+                          </div>
+                   
+                    </div>
+
+                    <!-- Btn NEXT -->
+                    <div class="Buttons">
+                        <div class="backBtn">
+                            <i class='bx bxs-left-arrow-alt'></i>
+                            <span class="btnText">RETOUR</span>
+
+                        </div>
+                        
+                      <!-- submit  -->
+                        <input type="submit" value="CONFIRMER">
+
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <!-- scriptt -->
+    <script>
+        // js code de la page
+        const form = document.querySelector("form"),
+                nextBtn = form.querySelector(".nextBtn"),
+                backBtn = form.querySelector(".backBtn"),
+                allInput = form.querySelectorAll(".first input");
+
+
+        // transition
+        nextBtn.addEventListener("click", ()=> {
+            allInput.forEach(input => {
+                if(input.value != ""){
+                    form.classList.add('secActive');
+                }else{
+                    form.classList.remove('secActive');
+                }
+            })
+        })
+        backBtn.addEventListener("click", () => form.classList.remove('secActive'));        
+
+
+     // js code de wilya et la commune
+
+        $(document).ready(function(){
+            console.log('ready');
+            function loadStates() {
+                $.ajax({
+                    url: 'https://countriesnow.space/api/v0.1/countries/states',
+                    type: 'POST',
+                    data: {country: 'Algeria'},
+                    dataType: 'json',
+                    success: function(data) {
+                        $('#wilaya').empty();
+                        $('#wilaya').append($('<option>').text('Choisir une wilaya'));
+                        $.each(data.data.states, function(index, state) {
+                            $('#wilaya').append($('<option>').text(state.name.replace(" Province", "")).attr('value', state.name.replace(" Province", "")));
+                        });
+                    }
+                });
+            }
+    
+            function loadCities(state) {
+                $.ajax({
+                    url: 'https://countriesnow.space/api/v0.1/countries/state/cities',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {country: "Algeria", state: state + " Province"},
+                    success: function(data) {
+                        $('#commune').empty();
+                        $('#commune').append($('<option>').text('Choisir une commune'));
+                        $.each(data.data, function(index, city) {
+                            $('#commune').append($('<option>').text(city).attr('value', city));
+                        });
+                    }
+                });
+            }
+    
+            loadStates();
+    
+            $('#wilaya').change(function(){
+                var state = $(this).val();
+                if (state === '' || state === 'Choisissez d\'abord une wilaya' || state === 'Choisir une commune') {
+                    return;
+                }
+                loadCities(state);
+            });
+        });
+    </script>
+    
+
+</body>
+
+</html>
